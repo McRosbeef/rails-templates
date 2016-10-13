@@ -87,7 +87,7 @@ HTML
 
 run "rm README.rdoc"
 markdown_file_content = <<-MARKDOWN
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+This is a new hope
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
@@ -110,5 +110,5 @@ TXT
   run "figaro install"
   git :init
   git add: "."
-  git commit: %Q{ -m 'Initial commit with minmal template from https://github.com/lewagon/rails-templates' }
+  git commit: %Q{ -m 'First commit' }
 end
