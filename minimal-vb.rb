@@ -39,18 +39,6 @@ file 'Procfile', <<-YAML
 web: bundle exec puma -C config/puma.rb
 YAML
 
-if Rails.version < "5"
-puma_file_content = <<-RUBY
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i
-
-threads     threads_count, threads_count
-port        ENV.fetch("PORT") { 3000 }
-environment ENV.fetch("RAILS_ENV") { "development" }
-RUBY
-
-file 'config/puma.rb', puma_file_content, force: true
-end
-
 run "rm -rf app/assets/stylesheets"
 run "curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip"
 run "unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets"
@@ -73,7 +61,7 @@ file 'app/views/layouts/application.html.erb', <<-HTML
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>TODO</title>
+    <title>Hello !</title>
     <%= csrf_meta_tags %>
     #{Rails.version >= "5" ? "<%= action_cable_meta_tag %>" : nil}
     <%= stylesheet_link_tag    'application', media: 'all' %>
