@@ -40,18 +40,6 @@ file 'Procfile', <<-YAML
 web: bundle exec puma -C config/puma.rb
 YAML
 
-if Rails.version < "5"
-puma_file_content = <<-RUBY
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i
-
-threads     threads_count, threads_count
-port        ENV.fetch("PORT") { 3000 }
-environment ENV.fetch("RAILS_ENV") { "development" }
-RUBY
-
-file 'config/puma.rb', puma_file_content, force: true
-end
-
 run "rm -rf app/assets/stylesheets"
 run "curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip"
 run "unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets"
@@ -71,7 +59,7 @@ file 'app/views/layouts/application.html.erb', <<-HTML
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TODO</title>
+    <title>Coucou toi !</title>
     <%= csrf_meta_tags %>
     #{Rails.version >= "5" ? "<%= action_cable_meta_tag %>" : nil}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -107,7 +95,7 @@ run "curl -L https://raw.githubusercontent.com/lewagon/design/master/logos/png/l
 
 run "rm README.rdoc"
 markdown_file_content = <<-MARKDOWN
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+This is a new hope.
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
@@ -151,5 +139,5 @@ RUBY
   run "figaro install"
   git :init
   git add: "."
-  git commit: %Q{ -m 'Initial commit with devise template from https://github.com/lewagon/rails-templates' }
+  git commit: %Q{ -m 'First commit' }
 end
